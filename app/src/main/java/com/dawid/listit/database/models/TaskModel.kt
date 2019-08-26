@@ -8,7 +8,6 @@ import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "tasks",
-    primaryKeys = ["id"],
     foreignKeys = [
         ForeignKey(
             entity = ListModel::class,
@@ -36,5 +35,5 @@ data class TaskModel (
     var notes: String? = null
 ) {
     @PrimaryKey(autoGenerate = true)
-    val id: Int? = null
+    var id: Int? = null
 }
