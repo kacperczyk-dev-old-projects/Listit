@@ -13,11 +13,10 @@ object DatabaseModule {
     @Provides
     @Singleton
     @JvmStatic
-    fun provideDatabase(application: Application) : ListItDatabase =
-        Room.databaseBuilder(
-            application,
-            ListItDatabase::class.java,
-            "ListIt"
+    fun provideDatabase(application: Application) : ListItDatabase = Room.databaseBuilder(
+        application,
+        ListItDatabase::class.java,
+        "ListIt"
         ).build()
 
 }

@@ -7,8 +7,7 @@ import androidx.room.PrimaryKey
 data class ListModel (
     var name: String,
     var notes: String,
-    var color: String,
-    var type: Int
+    var color: String
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null

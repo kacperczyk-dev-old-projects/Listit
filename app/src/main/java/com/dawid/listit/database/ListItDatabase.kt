@@ -3,6 +3,8 @@ package com.dawid.listit.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.dawid.listit.database.dao.ListDao
+import com.dawid.listit.database.dao.NoteDao
+import com.dawid.listit.database.dao.TaskDao
 import com.dawid.listit.database.models.ListModel
 import com.dawid.listit.database.models.NoteModel
 import com.dawid.listit.database.models.TaskModel
@@ -13,7 +15,10 @@ import com.dawid.listit.database.models.TaskModel
         TaskModel::class,
         NoteModel::class],
     version = 1,
-    exportSchema = false)
+    exportSchema = false
+)
 abstract class ListItDatabase : RoomDatabase() {
     abstract val listDao: ListDao
+    abstract val noteDao: NoteDao
+    abstract val taskDao: TaskDao
 }
