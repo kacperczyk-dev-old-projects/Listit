@@ -1,15 +1,23 @@
 package com.dawid.listit.ui.listdetail
 
+import android.os.Bundle
 import com.dawid.listit.ui.BaseView
 
 interface AddEditListContract {
 
     interface View : BaseView<Presenter> {
         fun setBackgroundColor(color: String)
+        fun setListColor(color: String)
+        fun setListName(name: String)
+        fun setListNotes(notes: String)
     }
 
     interface Presenter {
+        fun init(savedInstanceState: Bundle?)
         fun setListColor(color: String)
+        fun setListName(name: String)
+        fun setListNotes(notes: String)
+        fun saveList()
     }
 
 }

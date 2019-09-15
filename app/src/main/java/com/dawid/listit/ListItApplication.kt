@@ -8,7 +8,9 @@ import timber.log.Timber
 class ListItApplication : DaggerApplication() {
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerAppComponent.factory().create(applicationContext)
+        return DaggerAppComponent
+            .factory()
+            .create(applicationContext)
     }
 
     override fun onCreate() {

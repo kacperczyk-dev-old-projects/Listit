@@ -6,24 +6,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.home.HomeActivity">
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addListFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true" app:srcCompat="@drawable/ic_add_black_24dp"
-            android:id="@+id/addListFab"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/listGrid" android:layout_marginEnd="16dp"
-            android:focusable="true"/>
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_add_black_24dp" />
+
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listGrid"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            tools:itemCount="10"
-            tools:listitem="@layout/item_list"
+            android:outlineProvider="none"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" android:outlineProvider="none"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:spanCount="2"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_list" />
 </androidx.constraintlayout.widget.ConstraintLayout>

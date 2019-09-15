@@ -43,8 +43,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:text="9 due today"
                     android:textSize="@dimen/text_size_small"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/listNameTxt"
                     app:layout_constraintStart_toStartOf="@+id/listNameTxt"
                     app:layout_constraintTop_toBottomOf="@+id/overdueTxt" />
