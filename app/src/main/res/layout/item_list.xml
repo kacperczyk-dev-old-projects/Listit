@@ -7,13 +7,22 @@
         android:layout_height="wrap_content">
 
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
+            android:id="@+id/listCard"
+            style="@style/Widget.MaterialComponents.CardView"
+            app:strokeColor="@color/colorOnSecondary"
+            app:strokeWidth="1dp"
+            android:clickable="true"
+            android:checkable="true"
+            android:focusable="true"
+            android:longClickable="true"
+            app:rippleColor="@color/colorSecondary"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
             <TextView
                     android:id="@+id/listNameTxt"
                     android:layout_width="wrap_content"
@@ -50,6 +59,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/listNameTxt"
                     app:layout_constraintStart_toStartOf="@+id/listNameTxt"
                     app:layout_constraintTop_toBottomOf="@+id/overdueTxt" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

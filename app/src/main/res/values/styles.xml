@@ -1,13 +1,36 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryVariant</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+
+        <item name="actionModeStyle">@style/ActionModeTheme</item>
+        <item name="windowActionModeOverlay">true</item>
+        <!--
+        <item name="android:colorBackground">#FFFFFF</item>
+        <item name="colorOnBackground">#000000</item>
+        <item name="colorSurface">#FFFFFF</item>
+        <item name="colorOnSurface">#000000</item>
+        -->
+
+
     </style>
 
-    <style name="DialogTheme" parent="Theme.MaterialComponents.Dialog" />
+    <style name="ActionModeTheme" parent="Widget.AppCompat.ActionMode">
+        <item name="background">@color/colorPrimary</item>
+    </style>
+
+    <style name="Dialog" parent="Theme.MaterialComponents.Light.Dialog" />
+
+    <style name="EditTexWhiteBackground">
+        <item name="android:backgroundTint">@color/colorEditTextBackground</item>
+    </style>
 
 </resources>

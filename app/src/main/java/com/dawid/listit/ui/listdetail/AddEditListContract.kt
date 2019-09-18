@@ -6,10 +6,11 @@ import com.dawid.listit.ui.BaseView
 interface AddEditListContract {
 
     interface View : BaseView<Presenter> {
-        fun setBackgroundColor(color: String)
+        fun setBackgroundColor(oldColor: String, color: String)
         fun setListColor(color: String)
         fun setListName(name: String)
         fun setListNotes(notes: String)
+        fun enableSaveBtn(enable: Boolean)
     }
 
     interface Presenter {

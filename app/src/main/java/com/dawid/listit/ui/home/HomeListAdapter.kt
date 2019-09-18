@@ -35,9 +35,13 @@ class HomeListAdapter(val event: MutableLiveData<HomeListEvent> = MutableLiveDat
             //holder.deleteBtn.setOnClickListener {
                 //event.value = MeasurementListEvent.OnDeleteBtnClicked(position)
             //}
-            holder.itemView.setOnLongClickListener {_ ->
-                event.value = HomeListEvent.OnItemLongPressed(it.listModel.id!!)
+            holder.itemView.listCard.setOnLongClickListener {card ->
+                event.value = HomeListEvent.OnItemLongPressed(it.listModel.id!!, card)
                 true
+            }
+
+            holder.itemView.listCard.setOnClickListener { card ->
+                event.value = HomeListEvent.OnItemClicked(it.listModel.id!!, card)
             }
         }
     }
@@ -51,7 +55,8 @@ class HomeListAdapter(val event: MutableLiveData<HomeListEvent> = MutableLiveDat
 }
 
 sealed class HomeListEvent {
-    data class OnItemLongPressed(val listId: Int) : HomeListEvent()
+    data class OnItemLongPressed(val listId: Int, val card: View) : HomeListEvent()
+    data class OnItemClicked(val listId: Int, val card: View) : HomeListEvent()
 }
 
 class HomeListDiffUtilCallback : DiffUtil.ItemCallback<HomeList>() {
