@@ -8,6 +8,8 @@ import javax.inject.Inject
 
 class ListItRepository @Inject constructor(val database: ListItDatabase) {
 
+    //val list: LiveData<List<HomeList>> by lazy { database.listDao.getAllListsWithMetrics() }
+
     suspend fun getListById(id: Int): ListModel {
         return withContext(Dispatchers.IO) {
             database.listDao.getListById(id)
@@ -23,6 +25,12 @@ class ListItRepository @Inject constructor(val database: ListItDatabase) {
     suspend fun saveList(list: ListModel) {
         withContext(Dispatchers.IO) {
             database.listDao.saveList(list)
+        }
+    }
+
+    suspend fun deleteLists(lists: List<ListModel>) {
+        withContext(Dispatchers.IO) {
+            database.listDao.deleteLists(*lists.toTypedArray())
         }
     }
 

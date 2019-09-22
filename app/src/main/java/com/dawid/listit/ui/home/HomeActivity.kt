@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.cardview.widget.CardView
+import androidx.core.view.children
 import androidx.lifecycle.Observer
 import com.dawid.listit.domain.HomeList
 import com.dawid.listit.ui.listdetail.AddEditListActivity
@@ -18,7 +19,7 @@ import com.google.android.material.card.MaterialCardView
 class HomeActivity : DaggerAppCompatActivity(), HomeContract.View {
 
     private lateinit var adapter: HomeListAdapter
-
+    private var callback: HomeActionModeCallback? = null
     @Inject
     lateinit var presenter: HomePresenter
 
@@ -34,8 +35,8 @@ class HomeActivity : DaggerAppCompatActivity(), HomeContract.View {
     }
 
     override fun onResume() {
-        super.onResume()
         presenter.init()
+        super.onResume()
     }
 
     override fun onStart() {
@@ -61,7 +62,14 @@ class HomeActivity : DaggerAppCompatActivity(), HomeContract.View {
     }
 
     override fun startActionMode() {
-        startActionMode(HomeActionModeCallback())
+        val actionModeClickListener = ActionModeClickListener(
+            {presenter.handleActionClicked(it)},
+            {exitActionMode()}
+        )
+        callback = HomeActionModeCallback(
+            actionModeClickListener
+        )
+        startActionMode(callback)
     }
 
     override fun setCardChecked(card: View) {
@@ -73,5 +81,11 @@ class HomeActivity : DaggerAppCompatActivity(), HomeContract.View {
         val intent = Intent(this, AddEditListActivity::class.java)
         intent.putExtra(EXTRA_LIST_ID, listId)
         startActivity(intent)
+    }
+
+    override fun exitActionMode() {
+        callback?.destroy()
+        presenter.onExitActionMode()
+        adapter.notifyDataSetChanged()
     }
 }

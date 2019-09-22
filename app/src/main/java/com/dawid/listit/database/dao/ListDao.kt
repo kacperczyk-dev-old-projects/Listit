@@ -1,10 +1,7 @@
 package com.dawid.listit.database.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.dawid.listit.database.models.ListModel
 import com.dawid.listit.domain.HomeList
 
@@ -21,4 +18,7 @@ interface ListDao {
 
     @Query("select 10 as 'tasksCount', * from lists")
     fun getAllListsWithMetrics(): List<HomeList>
+
+    @Delete
+    fun deleteLists(vararg list: ListModel)
 }

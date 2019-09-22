@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -30,6 +31,7 @@ class HomeListAdapter(val event: MutableLiveData<HomeListEvent> = MutableLiveDat
 
     override fun onBindViewHolder(holder: HomeListViewHolder, position: Int) {
         getItem(position). let {
+            holder.itemView.listCard.isChecked = false
             holder.name.text = it.listModel.name
             //holder.result.text = "${it.result} ${it.unit}"
             //holder.deleteBtn.setOnClickListener {
@@ -66,6 +68,6 @@ class HomeListDiffUtilCallback : DiffUtil.ItemCallback<HomeList>() {
     }
 
     override fun areContentsTheSame(oldItem: HomeList, newItem: HomeList): Boolean {
-        return oldItem == newItem
+        return oldItem.listModel == newItem.listModel
     }
 }
