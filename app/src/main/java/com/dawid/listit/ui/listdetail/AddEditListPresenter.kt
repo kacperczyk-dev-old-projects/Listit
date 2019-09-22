@@ -9,7 +9,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 class AddEditListPresenter @Inject constructor(@Nullable var listId: Int, var repository: ListItRepository)
@@ -24,12 +23,10 @@ class AddEditListPresenter @Inject constructor(@Nullable var listId: Int, var re
         if(listId != -1) {
             scope.launch {
                 list = repository.getListById(listId)
-                Timber.i("LIST: ${list.id} ${list.name} ${list.notes} ${list.color}")
                 getView()?.setListColor(list.color)
                 getView()?.setBackgroundColor("#FFFFFF", list.color)
                 getView()?.setListName(list.name)
                 getView()?.setListNotes(list.notes)
-
             }
         } else {
             list = ListModel()

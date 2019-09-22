@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.WindowManager
+import android.widget.Toast
 import com.dawid.listit.R
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_add_edit_list.*
@@ -29,9 +30,6 @@ class AddEditListActivity : DaggerAppCompatActivity(), AddEditListContract.View 
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_add_edit_list)
 
-        presenter.setView(this)
-        presenter.init(savedInstanceState)
-
         color_picker_view.addOnColorChangedListener {
             val hexColor = it.toHexColor()
             presenter.setListColor(hexColor)
@@ -39,11 +37,9 @@ class AddEditListActivity : DaggerAppCompatActivity(), AddEditListContract.View 
 
         listNameEdit.editText?.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(!s.isNullOrEmpty()) {
+                if(s.toString().isNotEmpty()) {
                     listNameEdit.error = ""
                     saveListBtn.isEnabled = true
                     presenter.setListName(s.toString())
@@ -57,26 +53,26 @@ class AddEditListActivity : DaggerAppCompatActivity(), AddEditListContract.View 
 
         notesEdit.editText?.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(!s.isNullOrEmpty()) {
+                if(s.toString().isNotEmpty()) {
                     presenter.setListNotes(s.toString())
                 } else {
-                    presenter.setListName("")
+                    presenter.setListNotes("")
                 }
             }
         })
 
         saveListBtn.setOnClickListener {
-            presenter.saveList()
             onBackPressed()
         }
 
         cancelBtn.setOnClickListener {
             onBackPressed()
         }
+
+        presenter.setView(this)
+        presenter.init(savedInstanceState)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
