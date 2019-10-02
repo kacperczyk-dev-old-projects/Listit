@@ -12,13 +12,15 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.listdetail.AddEditListActivity"
-                android:theme="@style/Dialog"/>
+        <activity android:name=".ui.tasks.TasksActivity"></activity>
+        <activity
+                android:name=".ui.addeditlist.AddEditListActivity"
+                android:theme="@style/Dialog" />
         <activity android:name=".ui.home.HomeActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

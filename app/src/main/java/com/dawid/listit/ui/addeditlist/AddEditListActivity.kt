@@ -1,4 +1,4 @@
-package com.dawid.listit.ui.listdetail
+package com.dawid.listit.ui.addeditlist
 
 import android.animation.ObjectAnimator
 import android.graphics.Color
@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.WindowManager
-import android.widget.Toast
 import com.dawid.listit.R
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_add_edit_list.*
@@ -64,6 +63,7 @@ class AddEditListActivity : DaggerAppCompatActivity(), AddEditListContract.View 
         })
 
         saveListBtn.setOnClickListener {
+            presenter.saveList()
             onBackPressed()
         }
 

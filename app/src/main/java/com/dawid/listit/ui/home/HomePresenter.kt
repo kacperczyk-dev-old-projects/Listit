@@ -49,7 +49,7 @@ class HomePresenter @Inject constructor(var repository: ListItRepository)
                     getView()?.setCardChecked(event.card)
                     if (!actionMode) getView()?.exitActionMode()
                 } else {
-                    getView()?.startAddEdit(event.listId)
+                    getView()?.startTasks(event.listId)
                 }
             }
         }

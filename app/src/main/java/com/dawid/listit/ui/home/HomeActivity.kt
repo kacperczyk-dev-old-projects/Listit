@@ -3,16 +3,15 @@ package com.dawid.listit.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.cardview.widget.CardView
-import androidx.core.view.children
 import androidx.lifecycle.Observer
 import com.dawid.listit.domain.HomeList
-import com.dawid.listit.ui.listdetail.AddEditListActivity
-import com.dawid.listit.ui.listdetail.EXTRA_LIST_ID
+import com.dawid.listit.ui.addeditlist.AddEditListActivity
+import com.dawid.listit.ui.addeditlist.EXTRA_LIST_ID
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
 import com.dawid.listit.R
+import com.dawid.listit.ui.tasks.TasksActivity
 import com.google.android.material.card.MaterialCardView
 
 
@@ -79,6 +78,12 @@ class HomeActivity : DaggerAppCompatActivity(), HomeContract.View {
 
     override fun startAddEdit(listId: Int) {
         val intent = Intent(this, AddEditListActivity::class.java)
+        intent.putExtra(EXTRA_LIST_ID, listId)
+        startActivity(intent)
+    }
+
+    override fun startTasks(listId: Int) {
+        val intent = Intent(this, TasksActivity::class.java)
         intent.putExtra(EXTRA_LIST_ID, listId)
         startActivity(intent)
     }

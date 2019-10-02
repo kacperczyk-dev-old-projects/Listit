@@ -9,6 +9,7 @@ interface HomeContract {
     interface View : BaseView<Presenter> {
         fun updateData(data: List<HomeList>)
         fun startAddEdit(listId: Int)
+        fun startTasks(listId: Int)
         fun startActionMode()
         fun exitActionMode()
         fun setCardChecked(card: android.view.View)

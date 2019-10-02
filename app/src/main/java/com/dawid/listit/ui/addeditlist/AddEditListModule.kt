@@ -1,4 +1,4 @@
-package com.dawid.listit.ui.listdetail
+package com.dawid.listit.ui.addeditlist
 
 import dagger.Module
 import dagger.Provides

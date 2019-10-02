@@ -1,4 +1,4 @@
-package com.dawid.listit.ui.listdetail
+package com.dawid.listit.ui.addeditlist
 
 import android.os.Bundle
 import com.dawid.listit.ui.BaseView
