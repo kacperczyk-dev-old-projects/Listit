@@ -76,8 +76,11 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     compileOnly 'javax.annotation:jsr250-api:1.0'
 
-    //https://github.com/QuadFlask/colorpicker
+    // https://github.com/QuadFlask/colorpicker
     implementation 'com.github.QuadFlask:colorpicker:0.0.13'
+
+    // Preferences
+    implementation "androidx.preference:preference:1.1.0"
 
     // Test
     testImplementation 'junit:junit:4.12'

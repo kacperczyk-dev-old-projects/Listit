@@ -22,7 +22,6 @@
         <item name="windowActionModeOverlay">false</item>
 
 
-
     </style>
 
     <style name="ActionModeTheme" parent="Widget.AppCompat.ActionMode">
@@ -34,5 +33,14 @@
     <style name="EditTexWhiteBackground">
         <item name="android:backgroundTint">@color/colorEditTextBackground</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

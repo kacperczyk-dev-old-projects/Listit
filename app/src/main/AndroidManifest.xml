@@ -12,7 +12,12 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.tasks.TasksActivity"></activity>
+        <activity
+                android:name=".ui.addedittask.AddEditTaskActivity"
+                android:label="@string/title_activity_add_edit_task"
+                android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ui.applicationPreferences.ApplicationPreferencesActivity" />
+        <activity android:name=".ui.tasks.TasksActivity" />
         <activity
                 android:name=".ui.addeditlist.AddEditListActivity"
                 android:theme="@style/Dialog" />

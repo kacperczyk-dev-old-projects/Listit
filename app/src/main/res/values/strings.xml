@@ -5,4 +5,5 @@
     <string name="add_edit_list">Add/Edit List</string>
     <string name="enter_notes">Enter notes</string>
     <string name="Cancel">Cancel</string>
+    <string name="title_activity_add_edit_task">AddEditTaskActivity</string>
 </resources>

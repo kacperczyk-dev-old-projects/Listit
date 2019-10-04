@@ -3,6 +3,7 @@ package com.dawid.listit.ui.tasks
 import android.os.Bundle
 import android.view.Menu
 import com.dawid.listit.R
+import com.dawid.listit.database.models.TaskModel
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 import kotlinx.android.synthetic.main.activity_tasks.*
@@ -40,5 +41,9 @@ class TasksActivity : DaggerAppCompatActivity(), TasksContract.View {
 //        adapter.event.observe(this, Observer {
 //            presenter.handleEvent(it)
 //        })
+    }
+
+    override fun updateScreen(tasks: List<TaskModel>) {
+        adapter.submitList(tasks)
     }
 }

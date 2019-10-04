@@ -7,6 +7,6 @@ import com.dawid.listit.database.models.TaskModel
 
 @Dao
 interface TaskDao {
-    @Query("select * from tasks")
-    fun getAllTasks() : LiveData<List<TaskModel>>
+    @Query("select * from tasks where list_id = :listId")
+    fun getAllTasksFor(listId: Int) : List<TaskModel>
 }
