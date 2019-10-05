@@ -6,4 +6,11 @@
     <string name="enter_notes">Enter notes</string>
     <string name="Cancel">Cancel</string>
     <string name="title_activity_add_edit_task">AddEditTaskActivity</string>
+    <string name="enter_task_name">Enter Task Name</string>
+    <string name="due_date">Due Date</string>
+    <string name="completed">Completed</string>
+    <string name="flag">Flag</string>
+    <string name="not_set">Not set</string>
+    <string name="reminder">Reminder</string>
+    <string name="is_not_set">Not Set</string>
 </resources>

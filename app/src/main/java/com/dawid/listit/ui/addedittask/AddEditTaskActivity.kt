@@ -8,6 +8,9 @@ import com.dawid.listit.R
 
 import kotlinx.android.synthetic.main.activity_add_edit_task.*
 
+
+const val EXTRA_TASK_ID = "LIST_ID"
+
 class AddEditTaskActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

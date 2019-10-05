@@ -6,6 +6,7 @@ import com.dawid.listit.ui.BaseView
 interface TasksContract {
     interface View: BaseView<Presenter> {
         fun updateScreen(tasks: List<TaskModel>)
+        fun startAddEditTask(taskId: Int)
     }
 
     interface Presenter {
