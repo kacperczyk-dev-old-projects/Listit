@@ -3,14 +3,15 @@ package com.dawid.listit.ui.tasks
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dawid.listit.R
 import com.dawid.listit.database.models.TaskModel
+import kotlinx.android.synthetic.main.item_task.view.*
 
-//import kotlinx.android.synthetic.main.item_measurement.view.*
 
 class TaskModelListAdapter(val event: MutableLiveData<TaskModelEvent> = MutableLiveData()) :
         ListAdapter<TaskModel, TaskModelListAdapter.TaskModelViewHolder>(TaskModelDiffUtilCallback()) {
@@ -28,7 +29,7 @@ class TaskModelListAdapter(val event: MutableLiveData<TaskModelEvent> = MutableL
 
     override fun onBindViewHolder(holder: TaskModelViewHolder, position: Int) {
         getItem(position). let {
-            //holder.time.text = it.time
+            holder.name.text = it.name
             //holder.result.text = "${it.result} ${it.unit}"
             //holder.deleteBtn.setOnClickListener {
                 //event.value = MeasurementListEvent.OnDeleteBtnClicked(position)
@@ -38,7 +39,7 @@ class TaskModelListAdapter(val event: MutableLiveData<TaskModelEvent> = MutableL
 
 
     class TaskModelViewHolder(root: View) : RecyclerView.ViewHolder(root) {
-        //val time: TextView = root.measureTimeTxt
+        val name: TextView = root.taskNameTxt
         //val result: TextView = root.measureResultTxt
         //val deleteBtn: ImageButton = root.measureDeleteBtn
     }

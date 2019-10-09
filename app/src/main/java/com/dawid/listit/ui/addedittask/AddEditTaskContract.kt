@@ -4,11 +4,18 @@ import com.dawid.listit.database.models.TaskModel
 import com.dawid.listit.ui.BaseView
 
 interface AddEditTaskContract {
-    interface View: BaseView<Presenter> {
+    interface View : BaseView<Presenter> {
+        fun updateView(task: TaskModel)
 
     }
 
     interface Presenter {
-        fun saveTask(task: TaskModel)
+        fun init()
+        fun saveTask()
+        fun setName(name: String)
+        fun setNotes(notes: String)
+        fun setDueDate(date: String)
+        fun setFlag(flag: String)
+        fun setCompleted(string: String)
     }
 }

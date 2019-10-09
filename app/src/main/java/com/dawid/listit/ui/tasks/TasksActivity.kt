@@ -7,6 +7,7 @@ import com.dawid.listit.R
 import com.dawid.listit.database.models.TaskModel
 import com.dawid.listit.ui.addeditlist.EXTRA_LIST_ID
 import com.dawid.listit.ui.addedittask.AddEditTaskActivity
+import com.dawid.listit.ui.addedittask.EXTRA_TASK_ID
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 import kotlinx.android.synthetic.main.activity_tasks.*
@@ -24,17 +25,25 @@ class TasksActivity : DaggerAppCompatActivity(), TasksContract.View {
         addTaskFab.setOnClickListener {
             startAddEditTask(-1)
         }
+
+        presenter.setView(this)
     }
 
     override fun startAddEditTask(taskId: Int) {
         val intent = Intent(this, AddEditTaskActivity::class.java)
-        intent.putExtra(EXTRA_LIST_ID, taskId)
+        intent.putExtra(EXTRA_TASK_ID, taskId)
+        intent.putExtra(EXTRA_LIST_ID, this.intent.getIntExtra(EXTRA_LIST_ID, -1))
         startActivity(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.tasks_menu, menu)
         return true
+    }
+
+    override fun onResume() {
+        presenter.updateData()
+        super.onResume()
     }
 
     override fun onStart() {
@@ -58,4 +67,5 @@ class TasksActivity : DaggerAppCompatActivity(), TasksContract.View {
     override fun updateScreen(tasks: List<TaskModel>) {
         adapter.submitList(tasks)
     }
+
 }

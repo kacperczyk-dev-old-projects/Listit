@@ -1,9 +1,11 @@
 package com.dawid.listit.ui.home
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.Nullable
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
@@ -12,11 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dawid.listit.R
 import com.dawid.listit.domain.HomeList
 import kotlinx.android.synthetic.main.item_list.view.*
+import javax.inject.Inject
 
 //import kotlinx.android.synthetic.main.item_measurement.view.*
 
-class HomeListAdapter(val event: MutableLiveData<HomeListEvent> = MutableLiveData()) :
-        ListAdapter<HomeList, HomeListAdapter.HomeListViewHolder>(HomeListDiffUtilCallback()) {
+class HomeListAdapter @Inject constructor(var appContext: Context)
+    : ListAdapter<HomeList, HomeListAdapter.HomeListViewHolder>(HomeListDiffUtilCallback()) {
+
+    val event: MutableLiveData<HomeListEvent> = MutableLiveData()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -33,10 +38,9 @@ class HomeListAdapter(val event: MutableLiveData<HomeListEvent> = MutableLiveDat
         getItem(position). let {
             holder.itemView.listCard.isChecked = false
             holder.name.text = it.listModel.name
-            //holder.result.text = "${it.result} ${it.unit}"
-            //holder.deleteBtn.setOnClickListener {
-                //event.value = MeasurementListEvent.OnDeleteBtnClicked(position)
-            //}
+            holder.overdue.text = appContext.resources.getString(R.string.number_overdue, it.overdue)
+            holder.dueToday.text = appContext.resources.getString(R.string.number_due_today, it.dueToday)
+
             holder.itemView.listCard.setOnLongClickListener {card ->
                 event.value = HomeListEvent.OnItemLongPressed(it.listModel.id!!, card)
                 true
@@ -51,8 +55,8 @@ class HomeListAdapter(val event: MutableLiveData<HomeListEvent> = MutableLiveDat
 
     class HomeListViewHolder(root: View) : RecyclerView.ViewHolder(root) {
         val name: TextView = root.listNameTxt
-        //val result: TextView = root.measureResultTxt
-        //val deleteBtn: ImageButton = root.measureDeleteBtn
+        val overdue: TextView = root.overdueTxt
+        val dueToday: TextView = root.dueTodayTxt
     }
 }
 

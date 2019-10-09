@@ -20,6 +20,7 @@ interface HomeContract {
         fun handleEvent(event: HomeListEvent)
         fun handleActionClicked(item: MenuItem)
         fun onExitActionMode()
+        fun multipleChecked() : Boolean
     }
 
 }

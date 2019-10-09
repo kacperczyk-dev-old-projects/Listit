@@ -1,96 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <ImageButton
-            android:id="@+id/completeBtn"
-            style="@android:style/Widget.Material.ImageButton"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="16dp"
-            android:adjustViewBounds="true"
-            android:background="?android:selectableItemBackground"
-            android:cropToPadding="true"
-            android:scaleType="fitCenter"
-            android:src="@drawable/completion_circle"
-            app:layout_constraintBottom_toBottomOf="@+id/taskNameTxt"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/taskNameTxt"
-            tools:src="@drawable/completion_circle" />
+    <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.MaterialComponents.CardView"
+            app:strokeColor="@color/colorOnSecondary"
+            app:strokeWidth="1dp"
+            android:clickable="true"
+            android:checkable="true"
+            android:focusable="true"
+            android:longClickable="true"
+            app:rippleColor="@color/colorSecondary"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/taskNameTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="TextView"
-            android:textSize="@dimen/text_size_large"
-            app:layout_constraintDimensionRatio=""
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/taskNotesTxt"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:inputType="textMultiLine"
-            android:maxLines="3"
-            android:minLines="1"
-            android:singleLine="false"
-            android:text="TextView"
-            android:textSize="@dimen/text_size_small"
-            app:layout_constraintEnd_toStartOf="@+id/flagImg"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/taskNameTxt" />
+            <ImageButton
+                    android:id="@+id/completeBtn"
+                    style="@android:style/Widget.Material.ImageButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:adjustViewBounds="true"
+                    android:background="?android:selectableItemBackground"
+                    android:cropToPadding="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/completion_circle"
+                    app:layout_constraintBottom_toBottomOf="@+id/taskNameTxt"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/taskNameTxt"
+                    tools:src="@drawable/completion_circle" />
 
-    <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/dateTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="@+id/completeBtn"
-            app:layout_constraintEnd_toStartOf="@+id/completeBtn"
-            app:layout_constraintTop_toTopOf="@+id/completeBtn" />
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/taskNameTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="TextView"
+                    android:textSize="@dimen/text_size_large"
+                    app:layout_constraintDimensionRatio=""
+                    app:layout_constraintStart_toEndOf="@+id/flagImgView"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-            android:id="@+id/flagImg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/completeBtn"
-            app:layout_constraintEnd_toStartOf="@+id/dateTxt"
-            app:layout_constraintTop_toTopOf="@+id/completeBtn"
-            app:srcCompat="@android:drawable/btn_star_big_on" />
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/taskNotesTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:inputType="textMultiLine"
+                    android:maxLines="3"
+                    android:minLines="1"
+                    android:singleLine="false"
+                    android:text="TextView"
+                    android:textSize="@dimen/text_size_small"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/dateTxt"
+                    app:layout_constraintStart_toStartOf="@+id/taskNameTxt"
+                    app:layout_constraintTop_toBottomOf="@+id/taskNameTxt"
+                    app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-            android:id="@+id/subTasksNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/taskNotesTxt" />
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/dateTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="TextView"
+                    app:layout_constraintBottom_toBottomOf="@+id/completeBtn"
+                    app:layout_constraintEnd_toStartOf="@+id/completeBtn"
+                    app:layout_constraintTop_toTopOf="@+id/completeBtn" />
 
-    <View
-            android:id="@+id/divider"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="?android:attr/listDivider"
-            app:layout_constraintBottom_toBottomOf="@+id/subTasksNumber"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/subTasksNumber"
-            app:layout_constraintTop_toTopOf="@+id/subTasksNumber" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.Group
+                    android:id="@+id/subtasksGrp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="subTasksNumber,divider" />
+
+            <View
+                    android:id="@+id/divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintBottom_toBottomOf="@+id/subTasksNumber"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/subTasksNumber"
+                    app:layout_constraintTop_toTopOf="@+id/subTasksNumber" />
+
+            <TextView
+                    android:id="@+id/subTasksNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="TextView"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/taskNotesTxt" />
+
+            <ImageView
+                    android:id="@+id/flagImgView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/taskNameTxt"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/taskNameTxt"
+                    app:srcCompat="@android:drawable/btn_star_big_on" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

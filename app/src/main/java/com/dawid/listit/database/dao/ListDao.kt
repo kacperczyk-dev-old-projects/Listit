@@ -16,7 +16,11 @@ interface ListDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveList(list: ListModel)
 
-    @Query("select 10 as 'tasksCount', * from lists")
+    @Query("""
+        select (select count(1) from tasks t where t.list_id = l.id) as 'overdue', 
+        (select count(1) from tasks t where t.list_id = l.id) as 'dueToday', 
+        * 
+        from lists l """)
     fun getAllListsWithMetrics(): List<HomeList>
 
     @Delete

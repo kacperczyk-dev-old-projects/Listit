@@ -11,6 +11,11 @@ class ListItRepository @Inject constructor(val database: ListItDatabase) {
 
     //val list: LiveData<List<HomeList>> by lazy { database.listDao.getAllListsWithMetrics() }
 
+    suspend fun saveTask(task: TaskModel) {
+        withContext(Dispatchers.IO) {
+            database.taskDao.saveTask(task)
+        }
+    }
     suspend fun getAllTasksWithMetrics(listId: Int): List<TaskModel> {
         return withContext(Dispatchers.IO) {
             database.taskDao.getAllTasksFor(listId)

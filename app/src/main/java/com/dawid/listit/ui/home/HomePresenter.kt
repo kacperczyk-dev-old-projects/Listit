@@ -84,4 +84,8 @@ class HomePresenter @Inject constructor(var repository: ListItRepository)
         actionMode = false
         checkedList.clear()
     }
+
+    override fun multipleChecked(): Boolean {
+        return checkedList.size > 1
+    }
 }

@@ -15,12 +15,10 @@
         <activity
                 android:name=".ui.addedittask.AddEditTaskActivity"
                 android:label="@string/title_activity_add_edit_task"
-                android:theme="@style/AppTheme.NoActionBar"></activity>
+                android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ui.applicationPreferences.ApplicationPreferencesActivity" />
         <activity android:name=".ui.tasks.TasksActivity" />
-        <activity
-                android:name=".ui.addeditlist.AddEditListActivity"
-                android:theme="@style/Dialog" />
+        <activity android:name=".ui.addeditlist.AddEditListActivity" />
         <activity android:name=".ui.home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

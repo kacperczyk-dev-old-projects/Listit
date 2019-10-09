@@ -20,9 +20,9 @@ import androidx.room.PrimaryKey
         )]
 )
 data class TaskModel (
-    var name: String,
+    var name: String = "",
     @ColumnInfo(name = "list_id")
-    var listId: Int,
+    var listId: Int = -1,
     var completed: Long? = null,
     @ColumnInfo(name = "due_date")
     var dueDate: Long? = null,

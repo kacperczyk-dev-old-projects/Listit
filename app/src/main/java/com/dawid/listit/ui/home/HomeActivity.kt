@@ -2,6 +2,7 @@ package com.dawid.listit.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
 import com.dawid.listit.domain.HomeList
@@ -17,7 +18,8 @@ import com.google.android.material.card.MaterialCardView
 
 class HomeActivity : DaggerAppCompatActivity(), HomeContract.View {
 
-    private lateinit var adapter: HomeListAdapter
+    @Inject
+    lateinit var adapter: HomeListAdapter
     private var callback: HomeActionModeCallback? = null
     @Inject
     lateinit var presenter: HomePresenter
@@ -49,7 +51,7 @@ class HomeActivity : DaggerAppCompatActivity(), HomeContract.View {
     }
 
     private fun setupAdapter() {
-        adapter = HomeListAdapter()
+//        adapter = HomeListAdapter()
         listGrid.adapter = adapter
         adapter.event.observe(this, Observer {
             presenter.handleEvent(it)
@@ -62,8 +64,8 @@ class HomeActivity : DaggerAppCompatActivity(), HomeContract.View {
 
     override fun startActionMode() {
         val actionModeClickListener = ActionModeClickListener(
-            {presenter.handleActionClicked(it)},
-            {exitActionMode()}
+            { presenter.handleActionClicked(it) },
+            { exitActionMode() }
         )
         callback = HomeActionModeCallback(
             actionModeClickListener
@@ -74,6 +76,7 @@ class HomeActivity : DaggerAppCompatActivity(), HomeContract.View {
     override fun setCardChecked(card: View) {
         card as MaterialCardView
         card.isChecked = !card.isChecked
+        callback?.getMenu()?.getItem(0)?.isVisible = !presenter.multipleChecked()
     }
 
     override fun startAddEdit(listId: Int) {

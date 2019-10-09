@@ -13,4 +13,8 @@
     <string name="not_set">Not set</string>
     <string name="reminder">Reminder</string>
     <string name="is_not_set">Not Set</string>
+
+    <!-- Templates -->
+    <string name="number_overdue">%1$d overdue</string>
+    <string name="number_due_today">%1$d due today</string>
 </resources>
