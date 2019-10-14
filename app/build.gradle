@@ -53,7 +53,7 @@ dependencies {
     implementation "androidx.work:work-runtime-ktx:$work_manager_version"
 
     // Material
-    implementation "com.google.android.material:material:1.1.0-alpha10"
+    implementation "com.google.android.material:material:1.1.0-beta01"
 
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"

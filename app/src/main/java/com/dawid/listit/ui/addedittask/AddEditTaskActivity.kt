@@ -1,22 +1,57 @@
 package com.dawid.listit.ui.addedittask
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.Menu
+import android.widget.DatePicker
+import android.widget.TimePicker
 import androidx.core.widget.doOnTextChanged
 import com.dawid.listit.R
 import com.dawid.listit.database.models.TaskModel
+import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_add_edit_task.*
 import kotlinx.android.synthetic.main.content_add_edit_task.*
+import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 
 const val EXTRA_TASK_ID = "TASK_ID"
 
-class AddEditTaskActivity : DaggerAppCompatActivity(), AddEditTaskContract.View {
+class AddEditTaskActivity : DaggerAppCompatActivity(), AddEditTaskContract.View, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     @Inject
     lateinit var presenter: AddEditTaskPresenter
+    private val materialDatePickerBuilder: MaterialDatePicker.Builder<Long> = MaterialDatePicker.Builder.datePicker()
+    private val calendar: Calendar by lazy {
+        Calendar.getInstance()
+    }
+
+    private val datePicker by lazy {
+        DatePickerDialog(
+            this,
+            R.style.Dialog,
+            this,
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+    }
+
+    private val timePicker by lazy {
+        TimePickerDialog(
+            this,
+            R.style.Dialog,
+            this,
+            calendar.get(Calendar.HOUR_OF_DAY),
+            calendar.get(Calendar.MINUTE),
+            true
+        )
+    }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +66,15 @@ class AddEditTaskActivity : DaggerAppCompatActivity(), AddEditTaskContract.View 
         taskNameEditTxt.editText?.doOnTextChanged { text, start, count, after ->
             presenter.setName(text.toString())
         }
+
         taskNotesEditTxt.editText?.doOnTextChanged { text, start, count, after ->
             presenter.setNotes(text.toString())
         }
+
+        dueDateCard.setOnClickListener {
+            datePicker.show()
+        }
+
 
         presenter.setView(this)
         presenter.init()
@@ -53,4 +94,12 @@ class AddEditTaskActivity : DaggerAppCompatActivity(), AddEditTaskContract.View 
         return true
     }
 
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, day: Int) {
+        Timber.i("DATETIME $year-$month-$day")
+        timePicker.show()
+    }
+
+    override fun onTimeSet(view: TimePicker?, hour: Int, minutes: Int) {
+        Timber.i("DATETIME $hour:$minutes")
+    }
 }
