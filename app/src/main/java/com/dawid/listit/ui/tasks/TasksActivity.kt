@@ -11,6 +11,7 @@ import com.dawid.listit.util.EXTRA_TASK_ID
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 import kotlinx.android.synthetic.main.activity_tasks.*
+import timber.log.Timber
 
 class TasksActivity : DaggerAppCompatActivity(), TasksContract.View {
 
@@ -22,6 +23,7 @@ class TasksActivity : DaggerAppCompatActivity(), TasksContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tasks)
 
+        Timber.i("STARTED ACTIVITY TASKS")
         addTaskFab.setOnClickListener {
             startAddEditTask(-1)
         }

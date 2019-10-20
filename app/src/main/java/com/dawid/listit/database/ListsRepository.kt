@@ -58,7 +58,7 @@ class ListsRepository @Inject constructor(val database: ListItDatabase) {
         listsCache[list.id ?: -1] = list
     }
 
-    private fun refreshCache() {
-        listsCache.remove(-1)
+    fun refreshCache(id: Int = -1) {
+        listsCache.remove(id)
     }
 }

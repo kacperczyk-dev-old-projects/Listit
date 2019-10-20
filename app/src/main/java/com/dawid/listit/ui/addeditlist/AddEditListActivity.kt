@@ -72,6 +72,11 @@ class AddEditListActivity : DaggerAppCompatActivity(), AddEditListContract.View 
         presenter.init(savedInstanceState)
     }
 
+    override fun onBackPressed() {
+        presenter.refreshCache()
+        super.onBackPressed()
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putBoolean(IS_CACHE_DIRTY, true)
         super.onSaveInstanceState(outState)

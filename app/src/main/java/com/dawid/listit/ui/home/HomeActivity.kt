@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.dawid.listit.domain.HomeList
 import com.dawid.listit.ui.addeditlist.AddEditListActivity
@@ -34,6 +35,7 @@ class HomeActivity : DaggerAppCompatActivity(), HomeContract.View {
         }
 
         presenter.setView(this)
+        setupAdapter()
     }
 
     override fun onResume() {
@@ -41,14 +43,9 @@ class HomeActivity : DaggerAppCompatActivity(), HomeContract.View {
         super.onResume()
     }
 
-    override fun onStart() {
-        super.onStart()
-        setupAdapter()
-    }
-
     override fun onDestroy() {
-        super.onDestroy()
         listGrid.adapter = null
+        super.onDestroy()
     }
 
     private fun setupAdapter() {

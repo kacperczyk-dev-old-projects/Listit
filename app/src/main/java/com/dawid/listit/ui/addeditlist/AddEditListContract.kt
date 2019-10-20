@@ -19,6 +19,7 @@ interface AddEditListContract {
         fun setListName(name: String)
         fun setListNotes(notes: String)
         fun saveList()
+        fun refreshCache()
     }
 
 }

@@ -51,4 +51,8 @@ class AddEditListPresenter @Inject constructor(@Nullable var listId: Int, var re
             repository.saveList(list)
         }
     }
+
+    override fun refreshCache() {
+        repository.refreshCache(listId)
+    }
 }
