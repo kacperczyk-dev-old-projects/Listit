@@ -1,6 +1,8 @@
 package com.dawid.listit.ui.addedittask
 
-import com.dawid.listit.ui.addeditlist.EXTRA_LIST_ID
+
+import com.dawid.listit.util.EXTRA_LIST_ID
+import com.dawid.listit.util.EXTRA_TASK_ID
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named

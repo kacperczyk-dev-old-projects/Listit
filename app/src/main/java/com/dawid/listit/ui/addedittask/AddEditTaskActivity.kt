@@ -18,21 +18,21 @@ import java.util.*
 import javax.inject.Inject
 
 
-const val EXTRA_TASK_ID = "TASK_ID"
+
 
 class AddEditTaskActivity : DaggerAppCompatActivity(), AddEditTaskContract.View, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     @Inject
     lateinit var presenter: AddEditTaskPresenter
-    private val materialDatePickerBuilder: MaterialDatePicker.Builder<Long> = MaterialDatePicker.Builder.datePicker()
     private val calendar: Calendar by lazy {
         Calendar.getInstance()
     }
+    lateinit var dateTime: String
 
     private val datePicker by lazy {
         DatePickerDialog(
             this,
-            R.style.Dialog,
+            R.style.ThemeOverlay_MaterialComponents_Dialog,
             this,
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
@@ -43,7 +43,7 @@ class AddEditTaskActivity : DaggerAppCompatActivity(), AddEditTaskContract.View,
     private val timePicker by lazy {
         TimePickerDialog(
             this,
-            R.style.Dialog,
+            R.style.ThemeOverlay_MaterialComponents_Dialog,
             this,
             calendar.get(Calendar.HOUR_OF_DAY),
             calendar.get(Calendar.MINUTE),
@@ -75,9 +75,16 @@ class AddEditTaskActivity : DaggerAppCompatActivity(), AddEditTaskContract.View,
             datePicker.show()
         }
 
+        datePicker.setOnDismissListener { dateTime = "" }
+        timePicker.setOnDismissListener { dateTime = "" }
 
         presenter.setView(this)
         presenter.init()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        //TODO: menuInflater.inflate(R.menu.???, menu)
+        return true
     }
 
     override fun updateView(task: TaskModel) {
@@ -89,17 +96,20 @@ class AddEditTaskActivity : DaggerAppCompatActivity(), AddEditTaskContract.View,
         completedTxt.text = task.completed?.toString()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        //TODO: menuInflater.inflate(R.menu.???, menu)
-        return true
-    }
+
+
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, day: Int) {
-        Timber.i("DATETIME $year-$month-$day")
+        dateTime = "$year-$month-$day"
         timePicker.show()
     }
 
     override fun onTimeSet(view: TimePicker?, hour: Int, minutes: Int) {
-        Timber.i("DATETIME $hour:$minutes")
+        dateTime += "T$hour:$minutes"
+        presenter.setDueDate(dateTime)
+    }
+
+    override fun updateDateTime() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

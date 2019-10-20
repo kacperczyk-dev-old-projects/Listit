@@ -1,6 +1,6 @@
 package com.dawid.listit.ui.tasks
 
-import com.dawid.listit.ui.addeditlist.EXTRA_LIST_ID
+import com.dawid.listit.util.EXTRA_LIST_ID
 import dagger.Module
 import dagger.Provides
 

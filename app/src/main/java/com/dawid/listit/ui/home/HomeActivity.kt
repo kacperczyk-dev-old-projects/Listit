@@ -7,13 +7,14 @@ import android.view.View
 import androidx.lifecycle.Observer
 import com.dawid.listit.domain.HomeList
 import com.dawid.listit.ui.addeditlist.AddEditListActivity
-import com.dawid.listit.ui.addeditlist.EXTRA_LIST_ID
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
 import com.dawid.listit.R
 import com.dawid.listit.ui.tasks.TasksActivity
+import com.dawid.listit.util.EXTRA_LIST_ID
 import com.google.android.material.card.MaterialCardView
+
 
 
 class HomeActivity : DaggerAppCompatActivity(), HomeContract.View {

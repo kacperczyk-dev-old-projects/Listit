@@ -13,10 +13,7 @@ import javax.inject.Inject
 import androidx.vectordrawable.graphics.drawable.ArgbEvaluator
 
 
-const val EXTRA_LIST_ID = "LIST_ID"
-const val EXTRA_LIST_NAME = "LIST_NAME"
-const val EXTRA_LIST_NOTES = "LIST_NOTES"
-const val EXTRA_LIST_COLOR = "LIST_COLOR"
+const val IS_CACHE_DIRTY = "IS_CACHE_DIRTY"
 
 class AddEditListActivity : DaggerAppCompatActivity(), AddEditListContract.View {
 
@@ -76,9 +73,7 @@ class AddEditListActivity : DaggerAppCompatActivity(), AddEditListContract.View 
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putString(EXTRA_LIST_NAME, listNameEdit.editText?.text.toString())
-        outState.putString(EXTRA_LIST_NOTES, notesEdit.editText?.text.toString())
-        outState.putString(EXTRA_LIST_COLOR, color_picker_view.selectedColor.toHexColor())
+        outState.putBoolean(IS_CACHE_DIRTY, true)
         super.onSaveInstanceState(outState)
     }
 

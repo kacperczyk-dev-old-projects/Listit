@@ -8,6 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import org.joda.time.DateTime
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
@@ -36,7 +37,13 @@ class AddEditTaskPresenter @Inject constructor(
     }
 
     override fun setDueDate(date: String) {
-        task.dueDate = 1L
+        val dateTime = DateTime(date).toDate().time
+        task.dueDate = dateTime
+        getView()?.updateView(task)
+    }
+
+    override fun setReminder() {
+        //TODO: handle reminder type
     }
 
     override fun setFlag(flag: String) {
