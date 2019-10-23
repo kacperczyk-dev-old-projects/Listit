@@ -1,7 +1,7 @@
 package com.dawid.listit.domain
 
 import androidx.room.Embedded
-import com.dawid.listit.database.models.ListModel
+import com.dawid.listit.data.models.ListModel
 
 data class HomeList(
     val overdue: Int,

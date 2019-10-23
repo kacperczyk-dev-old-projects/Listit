@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dawid.listit.R
-import com.dawid.listit.database.models.TaskModel
+import com.dawid.listit.data.models.TaskModel
 import kotlinx.android.synthetic.main.item_task.view.*
 
 

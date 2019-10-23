@@ -8,12 +8,10 @@ import android.widget.DatePicker
 import android.widget.TimePicker
 import androidx.core.widget.doOnTextChanged
 import com.dawid.listit.R
-import com.dawid.listit.database.models.TaskModel
-import com.google.android.material.datepicker.MaterialDatePicker
+import com.dawid.listit.data.models.TaskModel
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_add_edit_task.*
 import kotlinx.android.synthetic.main.content_add_edit_task.*
-import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 

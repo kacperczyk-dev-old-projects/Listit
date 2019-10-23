@@ -1,13 +1,13 @@
-package com.dawid.listit.database
+package com.dawid.listit.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.dawid.listit.database.dao.ListDao
-import com.dawid.listit.database.dao.NoteDao
-import com.dawid.listit.database.dao.TaskDao
-import com.dawid.listit.database.models.ListModel
-import com.dawid.listit.database.models.NoteModel
-import com.dawid.listit.database.models.TaskModel
+import com.dawid.listit.data.dao.ListDao
+import com.dawid.listit.data.dao.NoteDao
+import com.dawid.listit.data.dao.TaskDao
+import com.dawid.listit.data.models.ListModel
+import com.dawid.listit.data.models.NoteModel
+import com.dawid.listit.data.models.TaskModel
 
 @Database(
     entities = [

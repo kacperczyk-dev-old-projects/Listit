@@ -2,13 +2,14 @@ package com.dawid.listit.ui.addeditlist
 
 import android.os.Bundle
 import androidx.annotation.Nullable
-import com.dawid.listit.database.ListsRepository
-import com.dawid.listit.database.models.ListModel
+import com.dawid.listit.data.ListsRepository
+import com.dawid.listit.data.models.ListModel
 import com.dawid.listit.ui.BasePresenter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 class AddEditListPresenter @Inject constructor(@Nullable var listId: Int, var repository: ListsRepository)
@@ -18,32 +19,32 @@ class AddEditListPresenter @Inject constructor(@Nullable var listId: Int, var re
     private val scope = CoroutineScope(Dispatchers.Main + job)
     private lateinit var list: ListModel
 
-
     override fun init(savedInstanceState: Bundle?) {
         scope.launch {
-           list = repository.getListById(listId)
+            list = repository.getListById(listId)
             getView()?.setListColor(list.color)
             getView()?.setBackgroundColor("#FFFFFF", list.color)
             getView()?.setListName(list.name)
             getView()?.setListNotes(list.notes)
+            repository.markAsDirty(listId, false)
         }
     }
 
     override fun setListColor(color: String) {
         val oldColor = list.color
         list.color = color
-        repository.updateCachedList(list)
+        repository.markAsDirty(listId)
         getView()?.setBackgroundColor(oldColor, color)
     }
 
     override fun setListName(name: String) {
         list.name = name
-        repository.updateCachedList(list)
+        repository.markAsDirty(listId)
     }
 
     override fun setListNotes(notes: String) {
         list.notes = notes
-        repository.updateCachedList(list)
+        repository.markAsDirty(listId)
     }
 
     override fun saveList() {
@@ -52,7 +53,4 @@ class AddEditListPresenter @Inject constructor(@Nullable var listId: Int, var re
         }
     }
 
-    override fun refreshCache() {
-        repository.refreshCache(listId)
-    }
 }

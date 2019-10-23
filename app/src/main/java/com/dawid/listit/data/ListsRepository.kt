@@ -1,31 +1,45 @@
-package com.dawid.listit.database
+package com.dawid.listit.data
 
-import com.dawid.listit.database.models.ListModel
-import com.dawid.listit.database.models.TaskModel
+import com.airbnb.lottie.model.MutablePair
+import com.dawid.listit.data.models.ListModel
 import com.dawid.listit.domain.HomeList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.reflect.*
 
 
 @Singleton
 class ListsRepository @Inject constructor(val database: ListItDatabase) {
 
     val listsCache = mutableMapOf<Int, ListModel>()
+    val isDirty = mutableMapOf<Int, Boolean>()
 
     suspend fun getListById(id: Int): ListModel {
-        val cachedList: ListModel = getListFromCache(id) ?: return getListFromDatabase(id)
-        return cachedList
+        if(isDirty[id] == false) {
+            return getListFromCache(id) ?: return getListFromDatabase(id)
+        }
+        return getListFromDatabase(id)
     }
 
     private suspend fun getListFromDatabase(id: Int): ListModel {
+        Timber.i("REFRESH CACHE GET LIST DB: $id")
         return withContext(Dispatchers.IO) {
             val list = database.listDao.getListById(id)
-            listsCache[list.id!!] = list
+            listsCache[id] = list
+            isDirty[id] = false
             return@withContext list
         }
+    }
+
+
+    private fun getListFromCache(id: Int?): ListModel? {
+        Timber.i("REFRESH CACHE GET CACHE: $id")
+        if(id == -1 && listsCache[id] == null) {
+            listsCache[id] = ListModel()
+        }
+        return listsCache[id]
     }
 
     suspend fun getAllListsWithMetrics(): List<HomeList> {
@@ -36,8 +50,9 @@ class ListsRepository @Inject constructor(val database: ListItDatabase) {
 
     suspend fun saveList(list: ListModel) {
         withContext(Dispatchers.IO) {
-            database.listDao.saveList(list)
-            refreshCache()
+            val newListId = database.listDao.saveList(list).toInt()
+            getListFromDatabase(newListId)
+            clearCache(-1)
         }
     }
 
@@ -47,18 +62,12 @@ class ListsRepository @Inject constructor(val database: ListItDatabase) {
         }
     }
 
-    private fun getListFromCache(id: Int?): ListModel? {
-        if(id == -1 && listsCache[id] == null) {
-            listsCache[id] = ListModel()
-        }
-        return listsCache[id]
+    fun markAsDirty(id: Int, dirty: Boolean = true) {
+        isDirty[id] = dirty
     }
 
-    fun updateCachedList(list: ListModel) {
-        listsCache[list.id ?: -1] = list
-    }
-
-    fun refreshCache(id: Int = -1) {
+    private fun clearCache(id: Int = -1) {
+        Timber.i("REFRESH CACHE: list $id")
         listsCache.remove(id)
     }
 }

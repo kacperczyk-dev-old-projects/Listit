@@ -11,9 +11,8 @@ import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_add_edit_list.*
 import javax.inject.Inject
 import androidx.vectordrawable.graphics.drawable.ArgbEvaluator
+import com.dawid.listit.util.toHexColor
 
-
-const val IS_CACHE_DIRTY = "IS_CACHE_DIRTY"
 
 class AddEditListActivity : DaggerAppCompatActivity(), AddEditListContract.View {
 
@@ -72,16 +71,6 @@ class AddEditListActivity : DaggerAppCompatActivity(), AddEditListContract.View 
         presenter.init(savedInstanceState)
     }
 
-    override fun onBackPressed() {
-        presenter.refreshCache()
-        super.onBackPressed()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putBoolean(IS_CACHE_DIRTY, true)
-        super.onSaveInstanceState(outState)
-    }
-
     override fun setListName(name: String) {
         listNameEdit.editText?.setText(name)
     }
@@ -110,8 +99,4 @@ class AddEditListActivity : DaggerAppCompatActivity(), AddEditListContract.View 
         animator.start()
     }
 
-}
-
-fun Int.toHexColor(): String {
-    return String.format("#%06X", 0xFFFFFF and this)
 }

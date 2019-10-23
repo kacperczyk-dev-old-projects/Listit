@@ -2,8 +2,8 @@ package com.dawid.listit.di
 
 import android.content.Context
 import androidx.room.Room
-import com.dawid.listit.database.ListItDatabase
-import com.dawid.listit.database.ListItRepository
+import com.dawid.listit.data.ListItDatabase
+import com.dawid.listit.data.ListItRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

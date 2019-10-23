@@ -1,15 +1,14 @@
 package com.dawid.listit.ui.addedittask
 
 import androidx.annotation.Nullable
-import com.dawid.listit.database.ListItRepository
-import com.dawid.listit.database.models.TaskModel
+import com.dawid.listit.data.ListItRepository
+import com.dawid.listit.data.models.TaskModel
 import com.dawid.listit.ui.BasePresenter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.joda.time.DateTime
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 

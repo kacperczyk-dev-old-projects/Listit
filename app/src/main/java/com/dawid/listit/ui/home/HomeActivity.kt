@@ -2,9 +2,7 @@ package com.dawid.listit.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.dawid.listit.domain.HomeList
 import com.dawid.listit.ui.addeditlist.AddEditListActivity
@@ -49,7 +47,6 @@ class HomeActivity : DaggerAppCompatActivity(), HomeContract.View {
     }
 
     private fun setupAdapter() {
-//        adapter = HomeListAdapter()
         listGrid.adapter = adapter
         adapter.event.observe(this, Observer {
             presenter.handleEvent(it)

@@ -1,4 +1,4 @@
-package com.dawid.listit.database.models
+package com.dawid.listit.data.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

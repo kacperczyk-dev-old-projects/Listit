@@ -1,6 +1,6 @@
-package com.dawid.listit.database
+package com.dawid.listit.data
 
-import com.dawid.listit.database.models.TaskModel
+import com.dawid.listit.data.models.TaskModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

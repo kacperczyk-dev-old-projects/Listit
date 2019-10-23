@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import com.dawid.listit.R
-import com.dawid.listit.database.models.TaskModel
+import com.dawid.listit.data.models.TaskModel
 import com.dawid.listit.ui.addedittask.AddEditTaskActivity
 import com.dawid.listit.util.EXTRA_LIST_ID
 import com.dawid.listit.util.EXTRA_TASK_ID
