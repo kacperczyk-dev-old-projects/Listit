@@ -11,6 +11,7 @@ import com.dawid.listit.util.EXTRA_TASK_ID
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 import kotlinx.android.synthetic.main.activity_tasks.*
+import kotlinx.android.synthetic.main.content_tasks.*
 import timber.log.Timber
 
 class TasksActivity : DaggerAppCompatActivity(), TasksContract.View {

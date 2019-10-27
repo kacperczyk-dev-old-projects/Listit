@@ -10,7 +10,6 @@ interface AddEditListContract {
         fun setListColor(color: String)
         fun setListName(name: String)
         fun setListNotes(notes: String)
-        fun enableSaveBtn(enable: Boolean)
     }
 
     interface Presenter {

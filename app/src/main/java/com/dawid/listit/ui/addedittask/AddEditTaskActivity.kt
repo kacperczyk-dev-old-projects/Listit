@@ -80,6 +80,7 @@ class AddEditTaskActivity : DaggerAppCompatActivity(), AddEditTaskContract.View,
 
         presenter.setView(this)
         presenter.init()
+
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)

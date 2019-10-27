@@ -1,129 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        tools:context=".ui.addeditlist.AddEditListActivity">
 
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/bg"
+    <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".ui.addeditlist.AddEditListActivity">
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-        <ImageView
-                android:id="@+id/background"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:adjustViewBounds="false"
-                app:layout_constraintBottom_toTopOf="@+id/listNameEdit"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-        <TextView
-                android:id="@+id/addEditTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_padding_medium"
-                android:layout_marginTop="@dimen/margin_padding_medium"
-                android:layout_marginEnd="@dimen/margin_padding_medium"
-                android:layout_marginBottom="@dimen/margin_padding_medium"
-                android:text="@string/add_edit_list"
-                android:textSize="@dimen/text_size_large"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/listNameEdit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:hint="@string/enter_list_name"
-                app:errorEnabled="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addEditTitle">
+    <include layout="@layout/content_add_edit_list" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                    style="@style/EditTexWhiteBackground"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@drawable/ic_done_white_24dp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/notesEdit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:hint="@string/enter_notes"
-                app:errorEnabled="true"
-                app:layout_constraintBottom_toTopOf="@+id/color_picker_view"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/listNameEdit">
-
-            <com.google.android.material.textfield.TextInputEditText
-                    style="@style/EditTexWhiteBackground"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.flask.colorpicker.ColorPickerView
-                android:id="@+id/color_picker_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_padding_medium"
-                android:layout_marginEnd="@dimen/margin_padding_medium"
-                app:density="8"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/notesEdit"
-                app:lightnessSlider="true"
-                app:lightnessSliderView="@+id/v_lightness_slider"
-                app:wheelType="FLOWER" />
-
-        <com.flask.colorpicker.slider.LightnessSlider
-                android:id="@+id/v_lightness_slider"
-                android:layout_width="0dp"
-                android:layout_height="8dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="@dimen/margin_padding_medium"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/color_picker_view"
-                app:layout_constraintStart_toStartOf="@+id/color_picker_view"
-                app:layout_constraintTop_toBottomOf="@+id/color_picker_view" />
-
-        <com.google.android.material.button.MaterialButton
-                android:id="@+id/saveListBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/save"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/v_lightness_slider" />
-
-        <com.google.android.material.button.MaterialButton
-                android:id="@+id/cancelBtn"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/Cancel"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/saveListBtn"
-                app:layout_constraintTop_toBottomOf="@+id/v_lightness_slider" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

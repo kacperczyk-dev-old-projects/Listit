@@ -1,17 +1,24 @@
 package com.dawid.listit.ui.addeditlist
 
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
 import android.view.WindowManager
+import androidx.core.graphics.ColorUtils
 import com.dawid.listit.R
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_add_edit_list.*
 import javax.inject.Inject
 import androidx.vectordrawable.graphics.drawable.ArgbEvaluator
 import com.dawid.listit.util.toHexColor
+import kotlinx.android.synthetic.main.activity_add_edit_list.*
+import kotlinx.android.synthetic.main.activity_add_edit_list.fab
+import kotlinx.android.synthetic.main.activity_add_edit_list.toolbar
+import kotlinx.android.synthetic.main.activity_add_edit_task.*
+import kotlinx.android.synthetic.main.content_add_edit_list.*
 
 
 class AddEditListActivity : DaggerAppCompatActivity(), AddEditListContract.View {
@@ -21,8 +28,9 @@ class AddEditListActivity : DaggerAppCompatActivity(), AddEditListContract.View 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.AppTheme)
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
         setContentView(R.layout.activity_add_edit_list)
 
         color_picker_view.addOnColorChangedListener {
@@ -36,11 +44,9 @@ class AddEditListActivity : DaggerAppCompatActivity(), AddEditListContract.View 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if(s.toString().isNotEmpty()) {
                     listNameEdit.error = ""
-                    saveListBtn.isEnabled = true
                     presenter.setListName(s.toString())
                 } else {
                     listNameEdit.error = "List name is required"
-                    saveListBtn.isEnabled = false
                     presenter.setListName("")
                 }
             }
@@ -58,17 +64,27 @@ class AddEditListActivity : DaggerAppCompatActivity(), AddEditListContract.View 
             }
         })
 
-        saveListBtn.setOnClickListener {
+        fab.setOnClickListener {
             presenter.saveList()
-            onBackPressed()
-        }
-
-        cancelBtn.setOnClickListener {
             onBackPressed()
         }
 
         presenter.setView(this)
         presenter.init(savedInstanceState)
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        //TODO: menuInflater.inflate(R.menu.???, menu)
+        return true
     }
 
     override fun onBackPressed() {
@@ -88,20 +104,25 @@ class AddEditListActivity : DaggerAppCompatActivity(), AddEditListContract.View 
         color_picker_view.setColor(Color.parseColor(color), false)
     }
 
-    override fun enableSaveBtn(enable: Boolean) {
-        saveListBtn.isEnabled = enable
-    }
-
     override fun setBackgroundColor(oldColor: String, color: String) {
-        val animator = ObjectAnimator.ofObject(
-            background,
+        val toolbarAnimator = ObjectAnimator.ofObject(
+            toolbar,
             "backgroundColor",
             ArgbEvaluator(),
             Color.parseColor(oldColor),
             Color.parseColor(color)
         )
-        animator.duration = 450
-        animator.start()
+        val statusBarAnimator = ObjectAnimator.ofObject(
+            window,
+            "statusBarColor",
+            ArgbEvaluator(),
+            ColorUtils.blendARGB(Color.parseColor(oldColor), Color.BLACK, 0.2f),
+            ColorUtils.blendARGB(Color.parseColor(color), Color.BLACK, 0.2f)
+        )
+        val animSet = AnimatorSet()
+        animSet.duration = 450
+        animSet.playTogether(toolbarAnimator, statusBarAnimator)
+        animSet.start()
     }
 
 }

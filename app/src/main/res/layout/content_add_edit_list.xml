@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".ui.addeditlist.AddEditListActivity"
+            tools:showIn="@layout/activity_add_edit_task">
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/listNameEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/enter_list_name"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditTexWhiteBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/notesEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/enter_notes"
+                app:errorEnabled="true"
+                app:layout_constraintBottom_toTopOf="@+id/color_picker_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/listNameEdit">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditTexWhiteBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.flask.colorpicker.ColorPickerView
+                android:id="@+id/color_picker_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_medium"
+                android:layout_marginEnd="@dimen/margin_padding_medium"
+                app:density="8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/notesEdit"
+                app:lightnessSlider="true"
+                app:lightnessSliderView="@+id/v_lightness_slider"
+                app:wheelType="FLOWER" />
+
+        <com.flask.colorpicker.slider.LightnessSlider
+                android:id="@+id/v_lightness_slider"
+                android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/margin_padding_medium"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/color_picker_view"
+                app:layout_constraintStart_toStartOf="@+id/color_picker_view"
+                app:layout_constraintTop_toBottomOf="@+id/color_picker_view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
