@@ -11,6 +11,8 @@ import com.dawid.listit.R
 import com.dawid.listit.data.models.TaskModel
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_add_edit_task.*
+import kotlinx.android.synthetic.main.activity_add_edit_task.toolbar
+import kotlinx.android.synthetic.main.activity_tasks.*
 import kotlinx.android.synthetic.main.content_add_edit_task.*
 import java.util.*
 import javax.inject.Inject
@@ -78,6 +80,14 @@ class AddEditTaskActivity : DaggerAppCompatActivity(), AddEditTaskContract.View,
 
         presenter.setView(this)
         presenter.init()
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

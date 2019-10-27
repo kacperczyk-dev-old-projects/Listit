@@ -19,7 +19,7 @@
 
         <item name="actionModeStyle">@style/ActionModeTheme</item>
         <item name="android:actionModeCloseDrawable">@drawable/ic_arrow_back_white_24dp</item>
-        <item name="windowActionModeOverlay">false</item>
+        <item name="windowActionModeOverlay">true</item>
 
 
     </style>

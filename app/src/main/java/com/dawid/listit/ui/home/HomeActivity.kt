@@ -2,6 +2,7 @@ package com.dawid.listit.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import androidx.lifecycle.Observer
 import com.dawid.listit.domain.HomeList
@@ -13,7 +14,9 @@ import com.dawid.listit.R
 import com.dawid.listit.ui.tasks.TasksActivity
 import com.dawid.listit.util.EXTRA_LIST_ID
 import com.google.android.material.card.MaterialCardView
-
+import kotlinx.android.synthetic.main.activity_home.toolbar
+import kotlinx.android.synthetic.main.activity_tasks.*
+import kotlinx.android.synthetic.main.content_home.*
 
 
 class HomeActivity : DaggerAppCompatActivity(), HomeContract.View {
@@ -34,6 +37,13 @@ class HomeActivity : DaggerAppCompatActivity(), HomeContract.View {
 
         presenter.setView(this)
         setupAdapter()
+
+        setSupportActionBar(toolbar)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        //menuInflater.inflate(R.menu.tasks_menu, menu)
+        return true
     }
 
     override fun onResume() {

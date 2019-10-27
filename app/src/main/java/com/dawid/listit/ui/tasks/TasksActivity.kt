@@ -29,6 +29,20 @@ class TasksActivity : DaggerAppCompatActivity(), TasksContract.View {
         }
 
         presenter.setView(this)
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.tasks_menu, menu)
+        return true
     }
 
     override fun startAddEditTask(taskId: Int) {
@@ -36,11 +50,6 @@ class TasksActivity : DaggerAppCompatActivity(), TasksContract.View {
         intent.putExtra(EXTRA_TASK_ID, taskId)
         intent.putExtra(EXTRA_LIST_ID, this.intent.getIntExtra(EXTRA_LIST_ID, -1))
         startActivity(intent)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.tasks_menu, menu)
-        return true
     }
 
     override fun onResume() {
