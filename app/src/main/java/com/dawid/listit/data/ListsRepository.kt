@@ -1,8 +1,8 @@
 package com.dawid.listit.data
 
-import com.airbnb.lottie.model.MutablePair
 import com.dawid.listit.data.models.ListModel
 import com.dawid.listit.domain.HomeList
+import com.dawid.listit.util.createFifoMap
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -13,29 +13,27 @@ import javax.inject.Singleton
 @Singleton
 class ListsRepository @Inject constructor(val database: ListItDatabase) {
 
-    val listsCache = mutableMapOf<Int, ListModel>()
-    val isDirty = mutableMapOf<Int, Boolean>()
+    val listsCache = createFifoMap<Int, ListModel>(5)
+    val isDirty = createFifoMap<Int, Boolean>(5)
 
     suspend fun getListById(id: Int): ListModel {
         if(isDirty[id] == false) {
-            return getListFromCache(id) ?: return getListFromDatabase(id)
+            return getListFromCache(id)!!
         }
-        return getListFromDatabase(id)
+        return getListFromDatabase(id) ?: getListFromCache(id)!!
     }
 
-    private suspend fun getListFromDatabase(id: Int): ListModel {
-        Timber.i("REFRESH CACHE GET LIST DB: $id")
+    private suspend fun getListFromDatabase(id: Int): ListModel? {
         return withContext(Dispatchers.IO) {
             val list = database.listDao.getListById(id)
             listsCache[id] = list
             isDirty[id] = false
+            Timber.i("SIZE OF THE CACHE ${listsCache.size}")
             return@withContext list
         }
     }
 
-
     private fun getListFromCache(id: Int?): ListModel? {
-        Timber.i("REFRESH CACHE GET CACHE: $id")
         if(id == -1 && listsCache[id] == null) {
             listsCache[id] = ListModel()
         }
@@ -67,7 +65,9 @@ class ListsRepository @Inject constructor(val database: ListItDatabase) {
     }
 
     private fun clearCache(id: Int = -1) {
-        Timber.i("REFRESH CACHE: list $id")
-        listsCache.remove(id)
+        if(listsCache[id] != null) {
+            listsCache.remove(id)
+            isDirty.remove(id)
+        }
     }
 }

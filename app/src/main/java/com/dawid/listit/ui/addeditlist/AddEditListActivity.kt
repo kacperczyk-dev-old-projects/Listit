@@ -71,6 +71,11 @@ class AddEditListActivity : DaggerAppCompatActivity(), AddEditListContract.View 
         presenter.init(savedInstanceState)
     }
 
+    override fun onBackPressed() {
+        presenter.markAsDirty(true)
+        super.onBackPressed()
+    }
+
     override fun setListName(name: String) {
         listNameEdit.editText?.setText(name)
     }

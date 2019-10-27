@@ -33,24 +33,25 @@ class AddEditListPresenter @Inject constructor(@Nullable var listId: Int, var re
     override fun setListColor(color: String) {
         val oldColor = list.color
         list.color = color
-        repository.markAsDirty(listId)
         getView()?.setBackgroundColor(oldColor, color)
     }
 
     override fun setListName(name: String) {
         list.name = name
-        repository.markAsDirty(listId)
     }
 
     override fun setListNotes(notes: String) {
         list.notes = notes
-        repository.markAsDirty(listId)
     }
 
     override fun saveList() {
         scope.launch {
             repository.saveList(list)
         }
+    }
+
+    override fun markAsDirty(dirty: Boolean) {
+        repository.markAsDirty(listId, true)
     }
 
 }
